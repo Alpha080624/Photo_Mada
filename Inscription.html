@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription Photographe</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    form { background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 0 5px #ccc; }
+    label { display: block; margin-top: 10px; }
+    input, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px; }
+    input[type="file"] { padding: 5px; }
+    button { margin-top: 15px; background: #007bff; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <h1>Inscription Photographe</h1>
+  <form id="formulaire">
+    <label>Nom :</label>
+    <input type="text" id="nom" required>
+
+    <label>Ville :</label>
+    <input type="text" id="ville" required>
+
+    <label>Numéro de téléphone :</label>
+    <input type="tel" id="numero" required>
+
+    <label>Lien (site, Instagram, WhatsApp...) :</label>
+    <input type="url" id="lien" required>
+
+    <label>Photos (galerie, tu peux en sélectionner plusieurs) :</label>
+    <input type="file" id="photos" multiple accept="image/*" required>
+
+    <button type="submit">Enregistrer</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("formulaire");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nom = document.getElementById("nom").value;
+      const ville = document.getElementById("ville").value;
+      const numero = document.getElementById("numero").value;
+      const lien = document.getElementById("lien").value;
+      const files = document.getElementById("photos").files;
+
+      const readerPromises = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        const promise = new Promise((resolve) => {
+          reader.onload = function(event) {
+            resolve(event.target.result);
+          };
+        });
+        reader.readAsDataURL(file);
+        readerPromises.push(promise);
+      }
+
+      Promise.all(readerPromises).then((base64photos) => {
+        const newPhotographe = {
+          nom,
+          ville,
+          numero,
+          lien,
+          photos: base64photos
+        };
+
+        const anciens = JSON.parse(localStorage.getItem("photographes")) || [];
+        anciens.push(newPhotographe);
+        localStorage.setItem("photographes", JSON.stringify(anciens));
+
+        alert("Photographe enregistré !");
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>
