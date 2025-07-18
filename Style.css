@@ -1,0 +1,115 @@
+/* Style global */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* En-tête */
+header {
+  background-color: #3c8dbc;
+  color: white;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+header img {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #2c3e50;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 12px 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+nav a:hover {
+  background-color: #1abc9c;
+  transition: 0.3s;
+}
+
+/* Contenu */
+.contenu {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Formulaire */
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Bouton */
+button {
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Galerie */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gallery img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Fiche photographe */
+.photographe {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+/* Pied de page */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #3c8dbc;
+  color: white;
+  margin-top: 40px;
+}
