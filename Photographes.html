@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photographes - Madagascar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo du site">
+    <h1>Photographes Madagascar</h1>
+    <p>Découvrez les photographes inscrits</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="photographes.html">Photographes</a>
+    <a href="inscription.html">Inscription</a>
+  </nav>
+
+  <div class="contenu" id="liste-photographes">
+    <h2>Photographes enregistrés</h2>
+    <!-- Les photographes seront ajoutés ici automatiquement -->
+  </div>
+
+  <footer>
+    &copy; 2025 - Tous droits réservés
+  </footer>
+
+  <script>
+    const conteneur = document.getElementById("liste-photographes");
+    const photographes = JSON.parse(localStorage.getItem("photographes")) || [];
+
+    if (photographes.length === 0) {
+      conteneur.innerHTML += "<p>Aucun photographe encore inscrit.</p>";
+    } else {
+      photographes.forEach((p, index) => {
+        const div = document.createElement("div");
+        div.className = "photographe";
+
+        div.innerHTML = `
+          <h3>${p.nom}</h3>
+          <p><strong>Ville :</strong> ${p.ville}</p>
+          <p><strong>Numéro :</strong> <a href="tel:${p.numero}">${p.numero}</a></p>
+          <p><strong>Lien :</strong> <a href="${p.lien}" target="_blank">${p.lien}</a></p>
+          <div class="gallery">
+            ${p.photos.map(photo => `<img src="${photo}" alt="Photo de ${p.nom}" />`).join('')}
+          </div>
+        `;
+
+        conteneur.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>
